@@ -188,7 +188,23 @@ Suggested addition:
 
 Why: This closes a common loophole: "we only processed it" can hide durable indexing or training.
 
-### 11. Article 30 - reframe "public utility" as an interoperability duty
+### 11. Articles 4, 28, 31, and 33 - protect all languages, scripts, prayer, and media
+
+Current issue: The charter protects expression and accessibility, but it should explicitly avoid
+ASCII-only, English-only, or dominant-language assumptions. Human expression includes mother
+tongues, languages of prayer, signed languages, oral traditions, visual/tactile media, mixed-script
+forms, and culturally specific symbolic systems.
+
+Suggested direction:
+
+> Adopt the linguistic, script, prayer, and multimodal expression proposal staged in
+> `20260623_150307_Codex_Part-I-VI_Linguistic-Script-and-Multimodal-Expression.md`.
+
+Why: Technical encoding constraints must not become cultural or spiritual exclusion. Protocol-safe
+aliases, hashes, or identifiers are acceptable only when the original expression remains preserved,
+governed, and reviewable.
+
+### 12. Article 30 - reframe "public utility" as an interoperability duty
 
 Current issue: "AI inference as a public utility" is politically and legally loaded. The intended
 technical point is provider interchangeability.
@@ -201,7 +217,7 @@ Suggested direction:
 
 Why: This protects the article from avoidable legal objection while keeping the anti-lock-in rule.
 
-### 12. Articles 35-37 - add crisis/offline enforcement language
+### 13. Articles 35-37 - add crisis/offline enforcement language
 
 Current strength: subgraphs, delta tracking, and Local 403 already support resilience.
 
@@ -215,7 +231,7 @@ UN values grounding candidates: Geneva Conventions and Additional Protocols for 
 family/correspondence protection, relief, and humanitarian access; refugee/statelessness instruments
 for displaced-person contexts.
 
-### 13. Article 39 - rename or define "Halt and Catch Fire"
+### 14. Article 39 - rename or define "Halt and Catch Fire"
 
 Current issue: "Halt and Catch Fire" is vivid, but in a formal charter it needs a crisp definition
 so implementers do not treat it as theatrical rather than normative.
@@ -228,7 +244,7 @@ Suggested direction:
 
 Why: The phrase can stay, but the enforcement semantics should be impossible to miss.
 
-### 14. Article 42 - separate local fork rights from release ratification
+### 15. Article 42 - separate local fork rights from release ratification
 
 Current issue: Article 42 contains living document, right to fork, and decentralized ratification in
 one article. Each is valid, but they are different governance acts.
@@ -249,8 +265,9 @@ community fork with a ratified upstream release.
 3. **Vulnerable-person and supported-decision layer:** Articles 5, 17, 23, 35.
 4. **Non-discrimination and bias auditing:** Articles 9, 20, 40.
 5. **Remedy and explanation:** Articles 22, 23, 38, 39, 40.
-6. **Crisis/offline humanitarian resilience:** Articles 29, 35, 36, 37.
-7. **Article 42 governance split:** dispositions, release ratification, local fork declarations.
+6. **Linguistic, script, prayer, and multimodal expression:** Articles 4, 28, 31, 33.
+7. **Crisis/offline humanitarian resilience:** Articles 29, 35, 36, 37.
+8. **Article 42 governance split:** dispositions, release ratification, local fork declarations.
 
 ## What Not To Do
 
