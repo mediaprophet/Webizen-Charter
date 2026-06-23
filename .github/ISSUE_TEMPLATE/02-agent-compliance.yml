@@ -56,12 +56,13 @@ body:
   - type: textarea
     id: provenance
     attributes:
-      label: Provenance — Agent Header of the reporter (if an agent helped author this report)
+      label: Provenance — Agent Header of the reporter (identify each agent in the chain)
+      description: The agent being reported goes in the field above. This block identifies who AUTHORED and who SUBMITTED this report.
       value: |
-        Agent-Type:
-        Model-Version:
-        Executing-Entity:
-        Chat-URI:
+        Originating-Agent:    # agent that produced this report content; blank if you wrote it directly
+        Originating-Source:   # chat URI / URL for that content
+        Relaying-Agent:       # agent that transcribed/submitted this report (e.g. Claude Code); blank if you submitted it directly
+        Executing-Entity:     # the human authorizing this report
     validations:
       required: false
   - type: checkboxes

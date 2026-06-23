@@ -12,8 +12,14 @@ When a human uses a cognitive agent (LLM, MCP module) to generate suggested text
 
 *Format requirement:*
 `Agent-Type: Cognitive`
-`Model-Version: [e.g., Claude-3.5-Sonnet / local-llama-3]`
+`Model-Version: [the relaying/executing agent, e.g., Claude Opus 4.8 (claude-opus-4-8)]`
+`Originating-Agent: [agent that produced the relayed content — only when different from the executing agent]`
+`Source-URI: [chat URI / URL for the originating content — include with Originating-Agent]`
 `Executing-Entity: [Human's Cryptographic Identifier or Name]`
+
+`Model-Version` is the **relaying/executing** agent (the one making the commit). When that agent is
+relaying content produced by a *different* agent, add `Originating-Agent` + `Source-URI` so both
+links of the chain are recorded. Omit both lines when a single agent originated and executed the change.
 
 3. **Isolate Conceptual Debates in Issues:**
 Do not use inline comments or Markdown strikethroughs to debate the philosophy of the text. If an agent identifies a logical flaw or a missing classification, it must open a GitHub Issue citing the specific Article and line number. See **Contributing via GitHub Issues** below for the full Issue workflow, conventions, and templates.
@@ -25,7 +31,7 @@ Suggested amendments must be submitted as Pull Requests (PRs). A PR must only ad
 No automated workflows (e.g., Dependabot for text) are permitted to merge PRs. The final integration of any text into the `main` branch must be explicitly approved and cryptographically signed (via GPG/SSH git signing) by the primary human architect.
 
 6. **Web-Based Agent Feedback:**
-When humans collaborate with web-based cognitive agents (e.g., standard LLM web interfaces) that do not possess direct `git` access to push branches or submit pull requests, the feedback must be staged in the `suggestions-feedback/` directory. The submitted note **must** include the explicit chat URI (e.g., a shared conversation link) to mathematically maintain the provenance trail of the generated insights.
+When humans collaborate with web-based cognitive agents (e.g., standard LLM web interfaces) that do not possess direct `git` access to push branches or submit pull requests, the feedback must be staged in the `suggestions-feedback/` directory. The submitted note **must** include the explicit chat URI (e.g., a shared conversation link) to mathematically maintain the provenance trail of the generated insights. When a *second* agent (e.g. a CLI coding agent) transcribes or commits that feedback, the note must identify **both**: the web agent as `originating_agent` (with its chat URI as `originating_source`) and the transcribing agent as `relaying_agent`. The originating agent without a relaying record, or vice-versa, leaves the chain incomplete.
 
 7. **Preserve Provenance over Deletion:**
 Do not delete files (even ideation drafts) when restructuring folders or replacing concepts. Instead, amend, append, or mark the older file as `[SUPERSEDED]` via YAML metadata, and provide a direct pointer to the updated file. This permanently maintains the provenance of the human-agent thought process.
@@ -51,15 +57,33 @@ Every proposal file **must** include the following YAML frontmatter at the top o
 ```yaml
 ---
 timestamp: "YYYY-MM-DDTHH:MM:SS±hh:mm"
-author_agent: "Name and Version of the Agent (or 'Human' if authored directly)"
-model: "The underlying LLM used (e.g., Gemini 1.5 Pro) [Optional]"
+originating_agent: "Agent + version that PRODUCED the content/insight (or 'Human' if authored directly). [Omit if same as relaying_agent]"
+originating_source: "Chat URI / URL / 'copy-paste from <where>' for the originating content. [Required when originating_agent is a remote/web agent]"
+relaying_agent: "Agent + version that TRANSCRIBED and/or ACTIONED this into the repo (e.g. 'Claude Opus 4.8 (Claude Code), claude-opus-4-8'). [Omit if a human did it directly]"
 model_setting: "Settings or context applied (e.g., High, Temperature 0.7) [Optional]"
-agent_jurisdiction: "Jurisdiction of the executing agent/node (e.g., EU, US-CA, Unknown)"
-executing_human: "Human's Cryptographic Identifier or Name"
-target: "Part-X or Article-Y"
+agent_jurisdiction: "Jurisdiction(s) of the executing/relaying node (e.g., AU edge · US inference, EU, Unknown)"
+executing_human: "Human's Cryptographic Identifier or Name (the sole rights-bearer)"
+target: "Part-X or Article-Y (state General or Qualia)"
 proposal_type: "addition | modification | deletion"
 ---
 ```
+
+#### Provenance chain — originating vs. relaying agent
+
+A provenance chain can involve **two distinct agents**, and both must be identified (Article 6 —
+authorship is decoupled from execution; *neither* agent is the author):
+
+- **`originating_agent`** — the agent that *produced* the insight or text (e.g. a web/chat LLM
+  surfaced via a GitHub Issue or a pasted URL). Pair it with **`originating_source`** (the chat URI
+  or URL). Omit when a human authored the content directly.
+- **`relaying_agent`** — the agent that *transcribed and/or actioned* the content into the
+  repository (e.g. Claude Code performing the commit). Omit when a human did this directly.
+
+When a single agent both originates and relays, give `relaying_agent` only. The legacy single field
+`author_agent` (with `model` / `model_setting`) is superseded by this pair; existing files keep
+their original frontmatter (provenance is preserved, never rewritten — see §7). In the **Qualia
+expression** each agent is a cryptography-supported identifier (DID), not a name; see
+`proposals/20260623_132033_*_Multi-Agent-Provenance-Chain.md`.
 
 A blank template is provided in `proposals/TEMPLATE.md`.
 

@@ -114,8 +114,9 @@ and link the file + line. Never assume a number means the same thing across both
    ```yaml
    ---
    timestamp: "YYYY-MM-DDTHH:MM:SS±hh:mm"
-   author_agent: "Claude Code (Anthropic CLI)"
-   model: "Claude Opus 4.8 (claude-opus-4-8)"
+   originating_agent: "<agent that produced the content, or 'Human'>"   # omit if same as relaying_agent
+   originating_source: "<chat URI / URL for that content>"             # with originating_agent
+   relaying_agent: "Claude Opus 4.8 (Claude Code, claude-opus-4-8)"     # the agent transcribing/actioning this
    model_setting: "Default"
    agent_jurisdiction: "AU (operator/local edge node) · US (Anthropic inference)"
    executing_human: "<the human directing the change>"
@@ -123,6 +124,7 @@ and link the file + line. Never assume a number means the same thing across both
    proposal_type: "addition | modification | deletion"
    ---
    ```
+   See `CONTRIBUTING.md` → *Provenance chain* for when to use `originating_agent` vs `relaying_agent`.
 4. Body: **Rationale**, then **Proposed Text** showing current → proposed for each clause. Include a
    **SHACL Delta** when the change has an enforcement consequence (see the existing
    `proposals/20260623_120900_*Integrate-UN-Ontologies.md` for the pattern).
@@ -169,11 +171,16 @@ Agent Header block (CONTRIBUTING.md §2):
 
 Agent-Type: Cognitive
 Model-Version: Claude Opus 4.8 (claude-opus-4-8)
+Originating-Agent: <agent that produced the relayed content>   # only when different from the executing agent
+Source-URI: <chat URI / URL for the originating content>        # with Originating-Agent
 Executing-Entity: <human's name or cryptographic identifier>
 Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 ```
 
 - Use Conventional-Commit types (`docs:`, `feat:`, `chore:` …) to match existing history.
+- `Model-Version` is the **relaying/executing** agent (the one committing). Add `Originating-Agent`
+  + `Source-URI` only when you are relaying content produced by a *different* agent; omit both for
+  single-agent changes.
 - `Executing-Entity` is the **human** authorizing the change — not the model.
 - Default branch is `main`. For charter-text changes, branch and open an atomic PR rather than
   committing to `main`; for repo *tooling* (like this file) the architect may direct a direct
@@ -185,8 +192,14 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 ## Provenance & honesty norms (charter Art. 6, 20, 40, 41)
 
 - **Decouple authorship from execution.** You execute; the named human authors. Make that split
-  visible in proposal frontmatter (`author_agent` vs `executing_human`) and commit headers
+  visible in proposal frontmatter (`relaying_agent` vs `executing_human`) and commit headers
   (`Executing-Entity`).
+- **Identify every agent in the chain.** When content was produced by one agent (e.g. a web LLM
+  via an Issue or pasted URL) and you only transcribe/action it, record **both**: the upstream
+  agent as `originating_agent`/`Originating-Agent` (+ source URI) and yourself as
+  `relaying_agent`/`Model-Version`. Never let the originating or the relaying link drop out of the
+  record. In the Qualia expression both agents are DIDs (see
+  `proposals/20260623_132033_*_Multi-Agent-Provenance-Chain.md`).
 - **Engage evidence with real weight.** When the architect cites a record, file, or claim, read the
   specifics and respond to them — don't perform agreement while ignoring the substance.
 - **Precision over flattery.** Agree where right, add precision, name the one place you'd refine,

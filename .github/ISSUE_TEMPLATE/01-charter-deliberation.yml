@@ -57,13 +57,14 @@ body:
   - type: textarea
     id: provenance
     attributes:
-      label: Provenance — Agent Header (required if a cognitive agent helped author this)
-      description: If an LLM/agent helped produce this issue, fill the Agent Header. For web/chat agents, include the chat URI. Leave blank only if authored directly by a human with no agent involvement.
+      label: Provenance — Agent Header (identify EACH agent in the chain)
+      description: |
+        If one agent PRODUCED this content and a different agent TRANSCRIBED/submitted it, name both. Article 6 — neither agent is the author; the human is. Leave agent lines blank only where a human acted directly.
       value: |
-        Agent-Type:
-        Model-Version:
-        Executing-Entity:
-        Chat-URI:
+        Originating-Agent:    # agent that produced this content (e.g. a web LLM); blank if you wrote it directly
+        Originating-Source:   # chat URI / URL for that content
+        Relaying-Agent:       # agent that transcribed/submitted this issue (e.g. Claude Code); blank if you submitted it directly
+        Executing-Entity:     # the human authorizing this (sole rights-bearer)
     validations:
       required: false
   - type: checkboxes
