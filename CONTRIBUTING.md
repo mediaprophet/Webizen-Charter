@@ -122,3 +122,56 @@ Structured forms live in `.github/ISSUE_TEMPLATE/`:
 - **Agent compliance report** — a cognitive or broker agent's behaviour against Charter boundaries (Agent Header, graph clearance, opaque ingestion, Local 403), feeding the decentralized attestation model.
 
 Blank issues are disabled to keep the provenance trail intact; if no template fits, open a **Charter deliberation** issue and follow the conventions above.
+
+---
+
+## Dispositions & Adjudication
+
+Submissions arrive through `proposals/`, `suggestions-feedback/`, and Issues. A **disposition** is
+the formal, recorded response to a submission — the spectrum between "merged" and "rejected" that a
+binary git merge would otherwise lose. Dispositions are recorded in the [`decisions/`](decisions/)
+directory (see its `README.md` and `TEMPLATE.md`). This is the operational expression of Article 42
+(ratification), Article 23 (human co-signing), and Article 39 (dispute resolution).
+
+### The controlled vocabulary
+
+**Binding** dispositions change a submission's canonical status and therefore **require a human
+cryptographic signature** (Art. 23). An automated agent may *draft* or *record* one, never *issue*
+one — *machine proposes, human disposes*.
+
+| Disposition | Binding? | Meaning |
+|-------------|----------|---------|
+| `accepted` | ✅ | Accepted in full; authorizes the human-signed merge to `main` / a release (Art. 42, §5). |
+| `partially-accepted` | ✅ | Named clauses accepted, others denied/deferred; must enumerate which. Usually spawns a revised atomic proposal. |
+| `denied` | ✅ | Rejected, with reason. The submission file remains, marked — never deleted (§7). |
+| `deferred` | ✅ | Parked, with a revisit condition or date. |
+| `superseded` | ✅ | Replaced by a newer submission; include the pointer. |
+| `withdrawn` | ✅ | The originating human retracts the submission. |
+| `endorsement` | ⚪ advisory | A trusted human peer/node cryptographically signs *support*. Endorsements accumulate as signed peer attestations (the web of attestations — see `proposals/topics/reputation-and-accountability/`); they are not themselves acceptance. |
+| `recommendation` | ⚪ advisory | "Request changes" — modifications proposed before a binding decision. |
+| `comment` | ⚪ advisory | A recorded note (prefer the Issue thread). |
+| `abstain` | ⚪ advisory | Recorded non-participation / recusal / conflict of interest. |
+
+### Procedure
+
+1. **Record** the disposition by copying `decisions/TEMPLATE.md` into `decisions/`, named
+   `YYYYMMDD_HHMMSS_[Disposition]_[Target]_[Brief].md`.
+2. **Reference** the target precisely (`proposals/<file>.md`, `issue #N`, or
+   `suggestions-feedback/<file>.md`) and the concept (`Part-X / Article-Y`, General or Qualia).
+3. **Carry provenance:** if an agent drafted or recorded the disposition, fill `originating_agent` /
+   `relaying_agent` (§ Provenance chain). Always name the `deciding_human`.
+4. **Sign binding dispositions.** Any binding disposition must include a `signature` reference and a
+   `deciding_human`. An agent-issued binding disposition lacking a ratifying human signature is a
+   conduct violation, not a decision.
+5. **Preserve, don't delete (§7).** `denied` / `superseded` / `withdrawn` mark the submission and
+   point onward; they never remove it.
+
+### Lifecycle
+
+`proposals/` · Issue · `suggestions-feedback/`  →  **`decisions/` (disposition)**  →  human-signed
+merge to `main` / release. A binding `accepted` (or `partially-accepted`) authorizes the merge of
+§5; advisory `endorsement` / `recommendation` accumulate as input and signed peer attestations.
+
+> The machine-enforceable form of this vocabulary (a disposition ontology + SHACL requiring binding
+> dispositions to carry a human signature) is staged as a charter proposal and requires ratification
+> before it is canonical; this section and `decisions/` are the working procedure in the meantime.

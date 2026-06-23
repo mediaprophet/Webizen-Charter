@@ -85,6 +85,7 @@ release/latest/        Immutable ratified snapshots (currently pre-release.md pl
 proposals/             Staging for amendments
   TEMPLATE.md          Blank proposal with required frontmatter
   topics/<slug>/       Multi-document ideation threads (NNN_title.md, status: Ideation)
+decisions/             Dispositions on submissions (accept/endorse/recommend/partial/deny) + README + TEMPLATE
 suggestions-feedback/  Web/CLI agent feedback notes, each carrying a provenance link
 un-instruments/        100+ machine-readable UN human-rights instruments (.n3)
 ```
@@ -157,6 +158,16 @@ charter files. When you open or comment on an issue:
 - An accepted issue **graduates into an atomic proposal** (path A) that references it (`Closes #N`);
   the human signs the merge. See `CONTRIBUTING.md` → *Contributing via GitHub Issues*.
 
+### E. Recording a disposition on a submission (`decisions/`)
+
+A **disposition** is the recorded response to a proposal/issue/feedback — `accepted`,
+`partially-accepted`, `denied`, `deferred`, `superseded`, `withdrawn` (all **binding**), or
+`endorsement` / `recommendation` / `comment` / `abstain` (advisory). Record it with
+`decisions/TEMPLATE.md`. You (an agent) may **draft** a `recommendation` or *provisional*
+`endorsement`, and may **record** a human's decision as `relaying_agent` — but you **may not issue a
+binding disposition**; those require a `deciding_human` + `signature` (Art. 23). Machine proposes,
+human disposes. See `CONTRIBUTING.md` → *Dispositions & Adjudication*.
+
 ---
 
 ## Commits, PRs, and the Agent Header
@@ -215,6 +226,8 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 |--------|---------|
 | Add a file under `proposals/`, `proposals/topics/`, `suggestions-feedback/` | ✅ Yes |
 | Open a GitHub Issue to deliberate (cite article + expression + provenance) | ✅ Yes — Issues debate, they don't change text |
+| Draft an advisory disposition (`recommendation`/`endorsement`) or record a human's decision in `decisions/` | ✅ Yes — as `relaying_agent`, never as the deciding party |
+| Issue a binding disposition (`accepted`/`denied`/etc.) | ❌ No — requires `deciding_human` + signature (Art. 23) |
 | Edit `working-draft/` charter prose directly | ⚠️ Only via proposal, or on explicit architect direction |
 | Edit Articles/Preamble/TOCs/SHACL/`.n3` on `main` | ❌ No — proposal + human-signed merge |
 | Delete or overwrite any existing file | ❌ No — supersede with `[SUPERSEDED]` + pointer |
