@@ -39,6 +39,9 @@ Do not delete files (even ideation drafts) when restructuring folders or replaci
 8. **The Dual-Track Parity Rule:**
 The repository maintains two tracks: `general/` (the universal standard) and `qualia/` (the nquin/graph reference implementation). Any Pull Request that modifies an Article in the `general/` track MUST include either: (1) A corresponding update to the Markdown and `.ttl` files in the `qualia/` track, or (2) A designated YAML frontmatter flag (`qualia_parity: not_required`) explicitly justifying why the philosophical change does not impact the mathematical execution layer.
 
+9. **Instrument Ingestion & Tracking:**
+The `un-instruments/` directory is the cryptographically bound legal substrate of the Charter. If you propose the addition, modification, or deprecation of a `.n3` human rights instrument, you MUST execute `scripts/Generate-Manifest.ps1` to rebuild the `MANIFEST.n3` corpus boundary. Additionally, all instrument updates MUST be recorded in the `un-instruments/CHANGELOG-INSTRUMENTS.md` ledger before the Pull Request is merged.
+
 ---
 
 ## Proposals Workflow & Metadata Conventions
