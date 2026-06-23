@@ -23,6 +23,8 @@ webizen:DataRepository a rdfs:Class ;
 webizen:StatelessInterfaceShape
     a sh:NodeShape ;
     sh:targetClass webizen:ConnectionInterface ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:maintainsPermanentState ;
         sh:datatype xsd:boolean ;
@@ -34,6 +36,8 @@ webizen:StatelessInterfaceShape
 webizen:DecoupledArchitectureShape
     a sh:NodeShape ;
     sh:targetClass webizen:ComputeEngine ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:isArchitecturallyCoupledTo ;
         sh:class webizen:DataRepository ;

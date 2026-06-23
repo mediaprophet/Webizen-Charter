@@ -17,15 +17,55 @@ webizen:QuarantinedPayload a rdfs:Class ;
 webizen:QuarantineShape
     a sh:NodeShape ;
     sh:targetClass webizen:QuarantinedPayload ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:canInteractWithGraph ;
         sh:datatype xsd:boolean ;
         sh:hasValue false ;
-        sh:message "Quarantined payloads are prohibited from interacting with the core graph topology." ;
+        sh:severity sh:Violation ;
+        sh:message "Quarantined payloads are prohibited from interacting with the core graph topology. (ABORT)" ;
     ] ;
     sh:property [
         sh:path webizen:requiresHumanRemediation ;
         sh:datatype xsd:boolean ;
         sh:hasValue true ;
         sh:minCount 1 ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        sh:path webizen:cooldownPeriod ;
+        sh:datatype xsd:duration ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Agent isolated for designated epoch due to consecutive structural non-compliance." ;
+    ] .
+
+# Article 42: Collective Ratification of Releases (Rough Consensus)
+webizen:RatificationShape a sh:NodeShape ;
+    sh:targetClass webizen:Ratification ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:path webizen:ratifiesVersion ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [
+        sh:path webizen:ratifiedBy ;
+        sh:class webizen:Human ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Subject to human rule: only humans may ratify releases (Art. 7, 42)." ;
+    ] .
+
+webizen:RatifierHumanOnlyShape a sh:NodeShape ;
+    sh:targetClass webizen:Ratification ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [
+        sh:path webizen:ratifiedBy ;
+        sh:node [
+            sh:not [ sh:class webizen:CognitiveAgent ] ;
+            sh:not [ sh:class webizen:EntityAgent ] ;
+        ] ;
+        sh:severity sh:Violation ;
+        sh:message "Local 403: A cognitive/mechanical agent or EntityAgent may not ratify a release. Voting power is restricted to NaturalPersons." ;
     ] .

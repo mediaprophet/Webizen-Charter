@@ -21,6 +21,8 @@ webizen:DataSubgraph a rdfs:Class ;
 webizen:SemanticClearanceShape
     a sh:NodeShape ;
     sh:targetClass webizen:SoftwareSystem ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:hasGraphClearance ;
         sh:node webizen:ClearanceNodeShape ;
@@ -30,6 +32,8 @@ webizen:SemanticClearanceShape
 
 webizen:ClearanceNodeShape
     a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:targetsSubgraph ;
         sh:class webizen:DataSubgraph ;

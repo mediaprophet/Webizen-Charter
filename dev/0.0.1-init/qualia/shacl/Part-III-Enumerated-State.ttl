@@ -23,6 +23,8 @@ webizen:EntityCentricDataset a rdfs:Class ;
 webizen:EnumeratedStateShape
     a sh:NodeShape ;
     sh:targetClass webizen:EnumeratedState ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:controlledBy ;
         sh:class webizen:Human ;
@@ -33,17 +35,32 @@ webizen:EnumeratedStateShape
     sh:property [
         sh:path webizen:hasCryptographicProof ;
         sh:datatype xsd:string ;
-        sh:minCount 1 ;
-        sh:message "The state must be mathematically verifiable via cryptographic proofs." ;
+        sh:minCount 2 ;
+        sh:message "The state must be mathematically verifiable via at least two independent cryptographic proofs (Multi-Key Defense)." ;
     ] .
 
 # Article 16 & 17: Separation of Agent-Centric and Entity-Centric Data
 webizen:DatasetSeparationShape
     a sh:NodeShape ;
     sh:targetClass webizen:EntityCentricDataset ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:hasCustody ;
         sh:class webizen:Human ;
         sh:minCount 1 ;
         sh:message "Entity-Centric Data must have clear custody belonging to the human." ;
+    ] .
+
+# Sybil Defense: Natural Person Verification
+webizen:NaturalPersonShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:NaturalPerson ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [
+        sh:path webizen:hasPeerQuorumCredential ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "A NaturalPerson must present a Verifiable Credential issued by a recognized local Peer Quorum to claim Selective Disclosure privacy." ;
     ] .

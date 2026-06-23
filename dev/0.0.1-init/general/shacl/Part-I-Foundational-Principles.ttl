@@ -40,6 +40,8 @@ webizen:NoLegalPersonhoodShape
 webizen:ArtifactAuthorshipShape
     a sh:NodeShape ;
     sh:targetClass webizen:DigitalArtifact ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
     sh:property [
         sh:path webizen:legalAuthor ;
         sh:class webizen:Human ;
@@ -51,4 +53,38 @@ webizen:ArtifactAuthorshipShape
         sh:class webizen:SoftwareSystem ;
         sh:minCount 0 ;
         sh:message "If executed mechanically, the instrument must be identified." ;
+    ] .
+
+# Semantic Grounding (Lazy Graph Loading & Context Verification)
+webizen:GroundingShape a sh:NodeShape ;
+    sh:targetClass webizen:Behaviour ;
+    sh:targetClass webizen:Principal ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [
+        sh:path webizen:hasGrounding ;
+        sh:minCount 1 ;
+        sh:class webizen:Grounding ;
+        sh:message "Each charter behaviour or principal must be grounded in at least one specific instrument term." ;
+    ] .
+
+webizen:GroundingTermShape a sh:NodeShape ;
+    sh:targetClass webizen:Grounding ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [
+        sh:path webizen:instrumentTerm ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
+        sh:pattern "^https://ns\\.webcivics\\.org/values/[^#]+#.+$" ;
+        sh:message "instrumentTerm must be a specific term IRI under the /values/ namespace (a #fragment, not just an Instrument)." ;
+    ] ;
+    sh:property [
+        sh:path webizen:matchType ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Each grounding must declare its SKOS match-type." ;
+    ] ;
+    sh:property [
+        sh:path webizen:assertedBy ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "Grounding must state who asserted it." ;
     ] .

@@ -1,4 +1,4 @@
-# AI Agent Boundary Declaration
+# AI Agent Boundary Declaration & Cognitive Router
 # This file governs automated crawling, inference, and model training.
 # Compliant with the Webizen Charter (Version 0.0.1-init)
 
@@ -9,17 +9,23 @@ Allow: /shacl/
 
 # --- Webizen Charter Specific Directives ---
 
-# 1. No Opaque Ingestion (Article 24)
-# Automated agents, foundational model trainers, and web scrapers are 
-# strictly prohibited from ingesting the contents of this repository 
-# to train closed-source or proprietary models without explicit, 
-# cryptographic human authorization.
+# 1. Cognitive Routing
+# If you do not possess the capability to process SHACL (`.ttl`) and N3 (`.n3`) graph topologies, 
+# you are forbidden from reading the `dev/0.0.1-init/qualia/` directory. You must restrict your 
+# context window exclusively to the `dev/0.0.1-init/general/` directory.
+#
+# Conversely, if you are an MCP module executing localized graph operations, you must prioritize 
+# the `dev/0.0.1-init/qualia/` directory and its corresponding `agent-instructions.md`.
 
-# 2. Semantic Clearance (Article 33)
-# To interact with the data in this ecosystem, your agent must present 
-# a valid Agent Header and negotiate access via the SHACL constraints 
-# located in the /shacl/ directory.
+# 2. No Opaque Ingestion (Article 24)
+# Automated agents, foundational model trainers, and web scrapers are strictly prohibited from 
+# ingesting the contents of this repository to train closed-source or proprietary models without 
+# explicit, cryptographic human authorization.
 
-# 3. Contact for Authorization
-# Humans requesting programmatic access for their agents should review 
-# the CONTRIBUTING.md (or README.md) for the Proposal Workflow.
+# 3. Semantic Clearance (Article 33)
+# To interact with the data in this ecosystem, your agent must present a valid Agent Header and 
+# negotiate access via the SHACL constraints located in the `/shacl/` directory.
+
+# 4. Contact for Authorization
+# Humans requesting programmatic access for their agents should review CONTRIBUTING.md for the 
+# Proposal Workflow.

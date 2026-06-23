@@ -13,3 +13,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - **UN Instrument Integration:** Bound the definitions of human rights directly to the `https://ns.webcivics.org/un/` namespace, integrating over 100 machine-readable UN human rights instruments.
 - **Proposals Framework:** Created a `proposals/` directory with a strict YAML metadata template for machine-readable tracking of suggested amendments.
 - **Release Structure:** Established `working-draft/` for ongoing edits and `release/` directories (`0.0.1-init` and `latest`) for immutable version snapshots.
+
+### Changed (Baseline Hardening Sprint)
+- **Dual-Track Divergence:** Split the `dev/` environment into `general/` and `qualia/` tracks to isolate the Universal Standard from the Reference Implementation. Added the Dual-Track Parity Rule to `CONTRIBUTING.md`.
+- **Closed-World Firewall:** Swept all 14 `.ttl` files across both tracks to enforce `sh:closed true` and `sh:ignoredProperties ( rdf:type )`, blocking unmapped vendor telemetry.
+- **Perimeter Severity:** Upgraded all structural constraints in `Part-VII-Perimeter-Enforcement.ttl` to `sh:severity sh:Violation`, forcing immediate graph aborts for malformed payloads.
+- **Cognitive Routing:** Rewrote `ai.txt` to strictly route generic web crawlers to the `general/` track and edge MCP modules to the `qualia/` track.
+
+### Added (Baseline Hardening Sprint)
+- **Agent Reputation Framework:** Established the `proposals/topics/reputation-and-accountability/` sandbox, drafting the initial blueprint for a decentralized, nquin-based attestation ecosystem.
+- **Sybil Defense:** Hardened `Part-III-Enumerated-State.ttl` to require a Verifiable Credential (`hasPeerQuorumCredential`) for a `webizen:NaturalPerson` to claim Selective Disclosure privacy.
+- **Ratification Quorums:** Added `webizen:RatificationShape` to enforce human-only voting power in release quorums, mathematically restricting `EntityAgent` and `CognitiveAgent` signatures.
+- **Provenance Cryptography:** Split origination in `Part-IV` into `AttestedOrigination` (hearsay) and `ProvenOrigination` (cryptographically signed), preventing relayers from forging origin chains.
+- **Architectural Decision Records (ADR):** Integrated the `decisions/` directory and updated `CONTRIBUTING.md` to mandate ADR drafts for all major proposals.

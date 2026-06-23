@@ -11,6 +11,15 @@
 webizen:CognitiveTransaction a rdfs:Class ;
     rdfs:label "A data alteration executed mechanically" .
 
+webizen:OriginationType a rdfs:Class ;
+    rdfs:label "The cryptographic nature of the originating agent" .
+
+webizen:AttestedOrigination rdfs:subClassOf webizen:OriginationType ;
+    rdfs:label "Hearsay: Relaying agent claims an origin URI without cryptographic proof" .
+
+webizen:ProvenOrigination rdfs:subClassOf webizen:OriginationType ;
+    rdfs:label "Proven: Originating agent provides a cryptographic signature over the delta" .
+
 # --- SHACL Shapes ---
 
 # Article 21 & 22: Structural Requirements for the Agent Header Telemetry Payload
@@ -32,6 +41,11 @@ webizen:AgentHeaderShape
         sh:path webizen:modelVersion ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path webizen:originationType ;
+        sh:class webizen:OriginationType ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
