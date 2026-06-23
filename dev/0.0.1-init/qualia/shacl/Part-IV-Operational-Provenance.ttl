@@ -1,0 +1,53 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> . 
+
+# Part IV: Operational Provenance & The Agent Header Protocol
+
+# --- Vocabulary ---
+
+webizen:CognitiveTransaction a rdfs:Class ;
+    rdfs:label "A data alteration executed mechanically" .
+
+# --- SHACL Shapes ---
+
+# Article 21 & 22: Structural Requirements for the Agent Header Telemetry Payload
+webizen:AgentHeaderShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:CognitiveTransaction ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:message "Transaction lacks compliant Agent Header provenance." ;
+
+    sh:property [
+        sh:path webizen:executedBy ;
+        sh:class webizen:CognitiveAgent ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:property [
+        sh:path webizen:modelVersion ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path webizen:executionTimestamp ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path webizen:authorizedBy ;
+        sh:class webizen:Human ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:property [
+        sh:path webizen:cryptographicSignature ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] .

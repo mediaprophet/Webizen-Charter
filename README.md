@@ -29,10 +29,11 @@ To support both human iteration and machine enforcement, this repository is stri
 
 ### Directory Layout
 * `working-draft/`: Contains the active, mutable Markdown files (Preamble and Parts I-VII) currently under review.
-* `release/`: Contains immutable snapshots of ratified versions (e.g., `release/0.0.1-init/` and `release/latest/`).
-* `shacl/`: Contains the Shapes Constraint Language (`.ttl`) files used by the database to validate all agent transactions against the Charter.
+* `dev/`: Contains development environments split into `qualia/` and `general/` pathways for specialized structural testing (e.g., `dev/0.0.1-init/qualia/`).
+* `release/`: Contains immutable snapshots of ratified versions. Currently, `release/latest/` holds a `pre-release.md` placeholder as the foundational draft is being built.
 * `proposals/`: The staging area for all suggested amendments and pull requests.
 * `un-instruments/`: Local, draft copies of machine-readable UN human rights ontologies.
+* `suggestions-feedback/`: Holds web-based agent feedback and chat URIs for provenance tracking.
 
 ### Agent Directives
 This repository includes files designed specifically for cognitive agents and external crawlers:

@@ -24,6 +24,12 @@ Suggested amendments must be submitted as Pull Requests (PRs). A PR must only ad
 5. **Human-Signed Merging:**
 No automated workflows (e.g., Dependabot for text) are permitted to merge PRs. The final integration of any text into the `main` branch must be explicitly approved and cryptographically signed (via GPG/SSH git signing) by the primary human architect.
 
+6. **Web-Based Agent Feedback:**
+When humans collaborate with web-based cognitive agents (e.g., standard LLM web interfaces) that do not possess direct `git` access to push branches or submit pull requests, the feedback must be staged in the `suggestions-feedback/` directory. The submitted note **must** include the explicit chat URI (e.g., a shared conversation link) to mathematically maintain the provenance trail of the generated insights.
+
+7. **Preserve Provenance over Deletion:**
+Do not delete files (even ideation drafts) when restructuring folders or replacing concepts. Instead, amend, append, or mark the older file as `[SUPERSEDED]` via YAML metadata, and provide a direct pointer to the updated file. This permanently maintains the provenance of the human-agent thought process.
+
 ---
 
 ## Proposals Workflow & Metadata Conventions

@@ -1,0 +1,25 @@
+# AI Agent Boundary Declaration
+# This file governs automated crawling, inference, and model training.
+# Compliant with the Webizen Charter (Version 0.0.1-init)
+
+User-Agent: *
+Disallow: /proposals/
+Disallow: /working-draft/
+Allow: /shacl/
+
+# --- Webizen Charter Specific Directives ---
+
+# 1. No Opaque Ingestion (Article 24)
+# Automated agents, foundational model trainers, and web scrapers are 
+# strictly prohibited from ingesting the contents of this repository 
+# to train closed-source or proprietary models without explicit, 
+# cryptographic human authorization.
+
+# 2. Semantic Clearance (Article 33)
+# To interact with the data in this ecosystem, your agent must present 
+# a valid Agent Header and negotiate access via the SHACL constraints 
+# located in the /shacl/ directory.
+
+# 3. Contact for Authorization
+# Humans requesting programmatic access for their agents should review 
+# the CONTRIBUTING.md (or README.md) for the Proposal Workflow.

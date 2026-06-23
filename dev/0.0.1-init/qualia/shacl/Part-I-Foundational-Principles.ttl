@@ -1,0 +1,54 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> . 
+
+# Part I: Foundational Principles & Legal Modalities
+
+# --- Imports & External Ontologies ---
+# The webizen:Human class and its associated rights are logically and semantically 
+# bound to the 100+ UN human rights instruments encoded in the core-ontologies namespace.
+# owl:imports <https://ns.webcivics.org/un/> .
+
+# --- Vocabulary ---
+
+webizen:Human a rdfs:Class ;
+    rdfs:label "Rights-Bearing Human Actor" ;
+    rdfs:comment "Defined by the universal rights established in the UN instruments." .
+
+webizen:SoftwareSystem a rdfs:Class ;
+    rdfs:label "Automated Tool/Instrument without Agency" .
+
+webizen:DigitalArtifact a rdfs:Class ;
+    rdfs:label "A generated digital artifact" .
+
+# --- SHACL Shapes ---
+
+# Article 3: Rejection of Legal Personhood for Code
+webizen:NoLegalPersonhoodShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:SoftwareSystem ;
+    sh:property [
+        sh:path webizen:hasLegalPersonhood ;
+        sh:datatype xsd:boolean ;
+        sh:hasValue false ;
+        sh:message "A SoftwareSystem cannot hold legal personhood." ;
+    ] .
+
+# Article 6: Decoupling Legal Authorship from Mechanical Execution
+webizen:ArtifactAuthorshipShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:DigitalArtifact ;
+    sh:property [
+        sh:path webizen:legalAuthor ;
+        sh:class webizen:Human ;
+        sh:minCount 1 ;
+        sh:message "Legal authorship must be strictly attributed to a Human." ;
+    ] ;
+    sh:property [
+        sh:path webizen:mechanicallyExecutedBy ;
+        sh:class webizen:SoftwareSystem ;
+        sh:minCount 0 ;
+        sh:message "If executed mechanically, the instrument must be identified." ;
+    ] .

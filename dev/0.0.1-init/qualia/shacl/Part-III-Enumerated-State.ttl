@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> . 
+
+# Part III: The Enumerated State & Verifiable Presence
+
+# --- Vocabulary ---
+
+webizen:EnumeratedState a rdfs:Class ;
+    rdfs:label "A user's verifiable, temporally defined digital presence" .
+
+webizen:AgentCentricDataset a rdfs:Class ;
+    rdfs:label "Data tied strictly to an executing software mechanism" .
+
+webizen:EntityCentricDataset a rdfs:Class ;
+    rdfs:label "Data tied to a human or asset" .
+
+# --- SHACL Shapes ---
+
+# Article 14: Definition of Presence via an Enumerated State
+webizen:EnumeratedStateShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:EnumeratedState ;
+    sh:property [
+        sh:path webizen:controlledBy ;
+        sh:class webizen:Human ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "The Enumerated State must be controlled by exactly one Human." ;
+    ] ;
+    sh:property [
+        sh:path webizen:hasCryptographicProof ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "The state must be mathematically verifiable via cryptographic proofs." ;
+    ] .
+
+# Article 16 & 17: Separation of Agent-Centric and Entity-Centric Data
+webizen:DatasetSeparationShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:EntityCentricDataset ;
+    sh:property [
+        sh:path webizen:hasCustody ;
+        sh:class webizen:Human ;
+        sh:minCount 1 ;
+        sh:message "Entity-Centric Data must have clear custody belonging to the human." ;
+    ] .
