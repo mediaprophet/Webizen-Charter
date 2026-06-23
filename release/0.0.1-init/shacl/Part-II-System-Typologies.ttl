@@ -1,0 +1,43 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> . 
+
+# Part II: System Typologies & Agent Boundaries
+
+# --- Vocabulary ---
+
+webizen:DeterministicAgent a rdfs:Class ;
+    rdfs:subClassOf webizen:SoftwareSystem ;
+    rdfs:label "Procedural, Rule-Based Agent" .
+
+webizen:CognitiveAgent a rdfs:Class ;
+    rdfs:subClassOf webizen:SoftwareSystem ;
+    rdfs:label "Probabilistic, Inference-Based Agent" .
+
+webizen:BrokerAgent a rdfs:Class ;
+    rdfs:subClassOf webizen:SoftwareSystem ;
+    rdfs:label "Interface or Orchestrator Agent" .
+
+# --- SHACL Shapes ---
+
+# Article 12: Inter-Agent Communication Standards
+webizen:AgentCommunicationShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:SoftwareSystem ;
+    sh:property [
+        sh:path webizen:communicatesWith ;
+        sh:class webizen:SoftwareSystem ;
+        sh:node webizen:AuthorizedCommunicationShape ;
+        sh:message "Inter-agent communication requires explicit authorization and boundary isolation." ;
+    ] .
+
+webizen:AuthorizedCommunicationShape
+    a sh:NodeShape ;
+    sh:property [
+        sh:path webizen:isAuthorizedByHuman ;
+        sh:datatype xsd:boolean ;
+        sh:hasValue true ;
+        sh:minCount 1 ;
+    ] .

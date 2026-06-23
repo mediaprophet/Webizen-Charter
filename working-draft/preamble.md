@@ -1,8 +1,13 @@
+---
+version: "0.0.1-init"
+status: "Draft"
+---
+
 ## The Webizen Charter
 
 ### Preamble
 
-**Whereas** the inherent dignity and the equal and inalienable rights of all members of the human family constitute the foundation of freedom, justice, and peace, as articulated in the Universal Declaration of Human Rights (UDHR), the International Covenant on Civil and Political Rights (ICCPR), and related international human rights instruments;
+**Whereas** the inherent dignity and the equal and inalienable rights of all members of the human family constitute the foundation of freedom, justice, and peace, as articulated in the Universal Declaration of Human Rights (UDHR), the International Covenant on Civil and Political Rights (ICCPR), and related international human rights instruments encoded as foundational, machine-readable ontologies (e.g., via the `https://ns.webcivics.org/un/` namespace);
 
 **Whereas** the digital ecosystem, the internet, and the Semantic Web do not exist as separate jurisdictions or extralegal frontiers, but rather function as a primary modality through which human beings exercise their fundamental rights to freedom of expression, peaceful assembly, economic participation, and the pursuit of knowledge;
 

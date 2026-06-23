@@ -1,0 +1,29 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> .
+
+webizen:Charter a owl:Ontology ;
+    dcterms:title "The Webizen Charter Ontology" ;
+    dcterms:description "A machine-readable structural encoding of the Webizen Charter." ;
+    dcterms:hasVersion "0.0.1-init" ;
+    owl:imports <https://ns.webcivics.org/un/> .
+
+# Core Classes
+webizen:CharterPart a rdfs:Class ;
+    rdfs:label "A major section of the Charter." .
+
+webizen:CharterArticle a rdfs:Class ;
+    rdfs:label "A specific article defining an architectural or legal rule." .
+
+# Article Definitions
+webizen:Article1 a webizen:CharterArticle ;
+    dcterms:isPartOf webizen:PartI ;
+    rdfs:label "The Primacy of Human Rights Instruments in Digital Spaces" .
+
+webizen:Article2 a webizen:CharterArticle ;
+    dcterms:isPartOf webizen:PartI ;
+    rdfs:label "The Strict Status of Automation as an Extension of Human Agency" .
+
+# (Further articles and formal axioms would be mapped here as the draft matures)

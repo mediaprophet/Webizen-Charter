@@ -1,0 +1,37 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> . 
+
+# Part VI: Graph Topologies & Distributed Data Encoding
+
+# --- Vocabulary ---
+
+webizen:GraphModel a rdfs:Class ;
+    rdfs:label "Graph-Based Knowledge Model" .
+
+webizen:DataSubgraph a rdfs:Class ;
+    rdfs:subClassOf webizen:GraphModel ;
+    rdfs:label "An isolated sub-graph for targeted processing" .
+
+# --- SHACL Shapes ---
+
+# Article 33: Semantic Mapping of System Relations and Operational Clearances
+webizen:SemanticClearanceShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:SoftwareSystem ;
+    sh:property [
+        sh:path webizen:hasGraphClearance ;
+        sh:node webizen:ClearanceNodeShape ;
+        sh:minCount 1 ;
+        sh:message "Agent must possess a semantic clearance mapped within the graph topology." ;
+    ] .
+
+webizen:ClearanceNodeShape
+    a sh:NodeShape ;
+    sh:property [
+        sh:path webizen:targetsSubgraph ;
+        sh:class webizen:DataSubgraph ;
+        sh:minCount 1 ;
+    ] .

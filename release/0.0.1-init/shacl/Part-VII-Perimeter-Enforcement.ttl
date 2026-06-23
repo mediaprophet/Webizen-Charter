@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> . 
+
+# Part VII: Perimeter Enforcement, Compliance, & Technical Debt Mitigation
+
+# --- Vocabulary ---
+
+webizen:QuarantinedPayload a rdfs:Class ;
+    rdfs:label "Payload isolated due to malformed Agent Header" .
+
+# --- SHACL Shapes ---
+
+# Article 38: Quarantine and Remediation Protocols
+webizen:QuarantineShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:QuarantinedPayload ;
+    sh:property [
+        sh:path webizen:canInteractWithGraph ;
+        sh:datatype xsd:boolean ;
+        sh:hasValue false ;
+        sh:message "Quarantined payloads are prohibited from interacting with the core graph topology." ;
+    ] ;
+    sh:property [
+        sh:path webizen:requiresHumanRemediation ;
+        sh:datatype xsd:boolean ;
+        sh:hasValue true ;
+        sh:minCount 1 ;
+    ] .

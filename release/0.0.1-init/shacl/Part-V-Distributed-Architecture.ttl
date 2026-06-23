@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix webizen: <https://w3id.org/webizen/ontology#> . 
+
+# Part V: Distributed Architecture & Context Preservation
+
+# --- Vocabulary ---
+
+webizen:ConnectionInterface a rdfs:Class ;
+    rdfs:label "Stateless Intermediary / API Gateway" .
+
+webizen:ComputeEngine a rdfs:Class ;
+    rdfs:label "Computational Processing Resource" .
+
+webizen:DataRepository a rdfs:Class ;
+    rdfs:label "Data Storage Resource" .
+
+# --- SHACL Shapes ---
+
+# Article 25: Open Connection Interfaces as Stateless Intermediaries
+webizen:StatelessInterfaceShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:ConnectionInterface ;
+    sh:property [
+        sh:path webizen:maintainsPermanentState ;
+        sh:datatype xsd:boolean ;
+        sh:hasValue false ;
+        sh:message "Connection interfaces must default to stateless intermediation." ;
+    ] .
+
+# Article 26: Architectural Separation of Compute Power from Data
+webizen:DecoupledArchitectureShape
+    a sh:NodeShape ;
+    sh:targetClass webizen:ComputeEngine ;
+    sh:property [
+        sh:path webizen:isArchitecturallyCoupledTo ;
+        sh:class webizen:DataRepository ;
+        sh:maxCount 0 ;
+        sh:message "Compute resources must not be forcibly coupled to data repositories (Walled-Garden prohibition)." ;
+    ] .

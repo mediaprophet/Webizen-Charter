@@ -53,3 +53,66 @@ No automated workflows (e.g., Dependabot for text) are permitted to merge PRs. T
 I recommend we draft the **Table of Contents** next.
 
 If we write the Preamble first, we risk writing a beautiful philosophy that lacks a defined technical landing gear. By outlining the Table of Contents, we define the exact FOAF subclasses, the `qualiadb` integration points, and the provenance rules we need to build. Once the scaffolding is locked, the Preamble will naturally flow to support it.
+
+---
+
+## Repository Structure & Versioning
+
+To support both human iteration and machine enforcement, this repository is strictly organized and versioned. We use Semantic Versioning (currently at `0.0.1-init`) and maintain a strict separation between working drafts and official releases.
+
+### Directory Layout
+* `working-draft/`: Contains the active, mutable Markdown files (Preamble and Parts I-VII) currently under review.
+* `release/`: Contains immutable snapshots of ratified versions (e.g., `release/0.0.1-init/` and `release/latest/`).
+* `shacl/`: Contains the Shapes Constraint Language (`.ttl`) files used by the database to validate all agent transactions against the Charter.
+* `proposals/`: The staging area for all suggested amendments and pull requests.
+* `un-instruments/`: Local, draft copies of machine-readable UN human rights ontologies.
+
+### Agent Directives
+This repository includes files designed specifically for cognitive agents and external crawlers:
+* `ai.txt`: Found at the root, this file dictates the strict ingestion rules and semantic clearance requirements for external bots and foundational models.
+* `working-draft/agent-instructions.md`: A highly condensed "System Prompt" version of the Charter. Any LLM or cognitive agent operating within the network must ingest this file to understand its imperative boundaries.
+* `working-draft/webizen-charter.n3`: The foundational structural ontology for the Charter itself.
+
+All notable changes are tracked in the `CHANGELOG.md`.
+
+---
+
+## Proposals Workflow & Metadata Conventions
+
+All suggested changes, additions, or deletions to the charter articles must be submitted via the `proposals/` directory.
+
+### Folder Structure
+Place all new proposal Markdown files within the `proposals/` directory.
+
+### File-Naming Convention
+Files must follow this naming convention:
+`YYYYMMDD_HHMMSS_[Agent_Name]_[Article_or_Part_Targeted]_[Brief_Description].md`
+
+*Example:* `20260623_120530_AntigravityAgent_Part-I_Update-Article-3.md`
+
+### Metadata Convention (YAML Frontmatter)
+Every proposal file **must** include the following YAML frontmatter at the top of the file. This ensures machine-readable tracking of the proposal's origin and intent.
+
+```yaml
+---
+timestamp: "YYYY-MM-DDTHH:MM:SS±hh:mm"
+author_agent: "Name and Version of the Agent (or 'Human' if authored directly)"
+agent_jurisdiction: "Jurisdiction of the executing agent/node (e.g., EU, US-CA, Unknown)"
+executing_human: "Human's Cryptographic Identifier or Name"
+target: "Part-X or Article-Y"
+proposal_type: "addition | modification | deletion"
+---
+```
+
+A blank template is provided in `proposals/TEMPLATE.md`.
+
+---
+
+## Machine-Readable Human Rights Instruments
+
+The `un-instruments/` directory contains working documents for machine-readable human rights systems encoded in `.n3` format. 
+
+* **Status:** Draft
+* **Project:** [qualiaDB](https://github.com/mediaprophet/qualiaDB/)
+
+These instruments serve as the foundational, cryptographically enforceable ontologies (e.g., under the `https://ns.webcivics.org/un/` namespace) that structurally govern the execution parameters of this Charter.
