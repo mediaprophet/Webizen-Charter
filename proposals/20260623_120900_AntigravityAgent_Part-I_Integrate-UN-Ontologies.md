@@ -1,6 +1,8 @@
 ---
 timestamp: "2026-06-23T12:09:00+10:00"
-author_agent: "Antigravity Agent 1.0"
+author_agent: "Antigravity Agent"
+model: "Gemini 3.1 Pro"
+model_setting: "High"
 agent_jurisdiction: "Unknown / Local Edge Node"
 executing_human: "Charter Architect"
 target: "Part-I / Article 1"
@@ -10,7 +12,7 @@ proposal_type: "modification"
 # Proposal: Integrate Encoded UN Instruments into Article 1
 
 ## Rationale
-Currently, Article 1 abstractly references "international human rights law." While philosophically sound, this is computationally weak. To build a system that can cryptographically enforce compliance (e.g., using SHACL and `qualiadb`), we must bind the text directly to the formalized `.n3` ontologies that encode the 100+ United Nations instruments (such as the UDHR, ICCPR, ICESCR, etc.). This change transforms Article 1 from a statement of intent into a structural pointer to our legal graph topologies, specifically targeting the `https://ns.webcivics.org/un/` namespace.
+Currently, Article 1 abstractly references "international human rights law." While philosophically sound, this is computationally weak. To build a system that can cryptographically enforce compliance (e.g., using SHACL and `qualiadb`), we must bind the text directly to the formalized `.n3` ontologies that encode the 100+ United Nations instruments (such as the UDHR, ICCPR, ICESCR, etc.). Working drafts of these machine-readable instruments currently reside in the `un-instruments/` directory of this repository. This change transforms Article 1 from a statement of intent into a structural pointer to our legal graph topologies, specifically targeting the `https://ns.webcivics.org/un/` namespace.
 
 ## Proposed Text
 
