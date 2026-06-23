@@ -175,3 +175,59 @@ merge to `main` / release. A binding `accepted` (or `partially-accepted`) author
 > The machine-enforceable form of this vocabulary (a disposition ontology + SHACL requiring binding
 > dispositions to carry a human signature) is staged as a charter proposal and requires ratification
 > before it is canonical; this section and `decisions/` are the working procedure in the meantime.
+
+---
+
+## Release Ratification — Quorum & Rough Consensus
+
+Per-submission dispositions (above) accept *individual* proposals. Promoting accepted work into a
+**permanent release** (`release/<version>/`, a new SemVer) is a *collective* act and a higher bar:
+it requires a **quorum of ratifying stakeholders** and **rough consensus**. This is Article 42's
+"collective ratification" made operational. The roster and parameters live in
+[`decisions/STAKEHOLDERS.md`](decisions/STAKEHOLDERS.md); a release ratification is recorded with
+[`decisions/RATIFICATION-TEMPLATE.md`](decisions/RATIFICATION-TEMPLATE.md).
+
+### Stakeholders — subject to human rule (Art. 7)
+
+- **Ratifying stakeholders** are rights-bearing **humans** with cryptographic identifiers. Only they
+  count toward quorum, sign the ratification, and may steward it.
+- **Advisory stakeholders** include **bots** (cognitive/mechanical agents) and unverified parties.
+  They may propose, endorse, and **raise objections that must be addressed on their merits** — but
+  they hold no ratifying standing, sign nothing binding, and are never counted toward quorum. Bots
+  participate; **humans rule.**
+
+### The two tests
+
+1. **Quorum** (participation sufficiency): at least `quorum_required` ratifying human stakeholders
+   must participate, or there is no permanent update — fail-safe default (cf. Art. 19.3). Quorum is
+   counted over **humans only**.
+2. **Rough consensus** (RFC 7282 style): the steward (a human) determines that the substantive
+   objections raised — by *anyone*, including bots — have been **addressed on merit**, and that no
+   sustained **blocking** objection remains open. This is explicitly **not** a majority vote: a valid
+   technical objection that identifies a real flaw must be addressed even if it is in the minority;
+   conversely, mere number of supporters does not override an unresolved blocking objection.
+
+### The gate to `release/`
+
+A permanent release update requires a **Ratification Record** demonstrating, in order:
+
+1. every bundled proposal already holds an `accepted` disposition (`decisions/`);
+2. **quorum met** (humans present ≥ required);
+3. **rough consensus established** — objection log shows no `open` blocking objection;
+4. **human cryptographic co-signature(s)** of the ratifying stakeholders (≥ quorum). No bot signature
+   substitutes for this; an agent in `ratified_by` voids the ratification.
+
+On a valid ratification: cut `release/<version>/` (immutable), bump SemVer, update `CHANGELOG.md`.
+
+### Lifecycle (full)
+
+```
+proposals/ · Issue · suggestions-feedback/
+        → decisions/ (per-item dispositions: accepted, …)
+        → Ratification (quorum + rough consensus + human signatures, subject to human rule)
+        → release/<version>/ (immutable) + SemVer bump + CHANGELOG
+```
+
+> The machine-enforceable form (quorum / rough-consensus / human-only-ratifier SHACL, Art. 42) is
+> staged as a charter proposal; this section + `decisions/STAKEHOLDERS.md` +
+> `decisions/RATIFICATION-TEMPLATE.md` are the working procedure until it is ratified.

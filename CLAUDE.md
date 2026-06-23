@@ -86,6 +86,7 @@ proposals/             Staging for amendments
   TEMPLATE.md          Blank proposal with required frontmatter
   topics/<slug>/       Multi-document ideation threads (NNN_title.md, status: Ideation)
 decisions/             Dispositions on submissions (accept/endorse/recommend/partial/deny) + README + TEMPLATE
+                       + STAKEHOLDERS.md (roster/quorum) + RATIFICATION-TEMPLATE.md (release consensus)
 suggestions-feedback/  Web/CLI agent feedback notes, each carrying a provenance link
 un-instruments/        100+ machine-readable UN human-rights instruments (.n3)
 ```
@@ -168,6 +169,18 @@ A **disposition** is the recorded response to a proposal/issue/feedback — `acc
 binding disposition**; those require a `deciding_human` + `signature` (Art. 23). Machine proposes,
 human disposes. See `CONTRIBUTING.md` → *Dispositions & Adjudication*.
 
+### F. Promoting accepted work into a release (ratification)
+
+A **permanent** update to `release/<version>/` is a *collective* act gated by **quorum + rough
+consensus** (Art. 42), not a single acceptance. Only **humans** are ratifying stakeholders — they
+count toward quorum and sign; **bots are advisory** (you may propose, endorse, and raise objections
+that must be addressed on merit, but you never ratify or count toward quorum — *subject to human
+rule*). A ratification needs: every bundled proposal `accepted`, quorum met, no open *blocking*
+objection, and human signatures ≥ quorum. You may **compile/record** a ratification record (as
+`relaying_agent`) for a human to sign; you may **not** cut a release yourself. See
+`decisions/STAKEHOLDERS.md`, `decisions/RATIFICATION-TEMPLATE.md`, and `CONTRIBUTING.md` →
+*Release Ratification*.
+
 ---
 
 ## Commits, PRs, and the Agent Header
@@ -228,6 +241,8 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 | Open a GitHub Issue to deliberate (cite article + expression + provenance) | ✅ Yes — Issues debate, they don't change text |
 | Draft an advisory disposition (`recommendation`/`endorsement`) or record a human's decision in `decisions/` | ✅ Yes — as `relaying_agent`, never as the deciding party |
 | Issue a binding disposition (`accepted`/`denied`/etc.) | ❌ No — requires `deciding_human` + signature (Art. 23) |
+| Compile/record a release ratification record for a human to sign | ✅ Yes — as `relaying_agent`, never as a ratifier |
+| Ratify a release / count toward quorum / cut `release/<version>/` | ❌ No — humans only; quorum + rough consensus, subject to human rule (Art. 42) |
 | Edit `working-draft/` charter prose directly | ⚠️ Only via proposal, or on explicit architect direction |
 | Edit Articles/Preamble/TOCs/SHACL/`.n3` on `main` | ❌ No — proposal + human-signed merge |
 | Delete or overwrite any existing file | ❌ No — supersede with `[SUPERSEDED]` + pointer |

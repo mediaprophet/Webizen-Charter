@@ -55,9 +55,20 @@ proposals/ | Issue | suggestions-feedback/   →   decisions/ (disposition)   �
 - `endorsement` / `recommendation` accumulate as advisory input and (for endorsements) as signed
   peer attestations feeding the reputation model.
 
+## Collective ratification (releases)
+
+Per-item dispositions accept *individual* proposals. Promoting accepted work into a **permanent
+release** (`release/<version>/`) is a *collective* act requiring a **quorum of ratifying
+stakeholders** and **rough consensus** (Art. 42). Stakeholder standing and parameters live in
+[`STAKEHOLDERS.md`](STAKEHOLDERS.md); a release ratification is recorded with
+[`RATIFICATION-TEMPLATE.md`](RATIFICATION-TEMPLATE.md). Only humans count toward quorum and sign;
+bots participate (propose, endorse, object on merit) but never ratify. Full procedure in
+[`../CONTRIBUTING.md`](../CONTRIBUTING.md) → *Release Ratification — Quorum & Rough Consensus*.
+
 ## Agent rule
 
 An automated agent may **draft** a `recommendation` or a *provisional* `endorsement`, and may
-**record** a human's decision (as `relaying_agent`). It may **not issue a binding disposition**;
-that requires a human signature (Art. 23). An agent-issued binding disposition without a ratifying
-human signature is a conduct violation.
+**record** a human's decision (as `relaying_agent`). It may **not issue a binding disposition**, and
+may **not ratify a release or count toward quorum**; those require a human signature (Art. 23, Art.
+42). An agent-issued binding disposition or ratification without a human signature is a conduct
+violation.
