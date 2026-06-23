@@ -4,8 +4,10 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 webizen:CharterLegalSubstrate a webizen:InstrumentCorpus ;
-    dcterms:title "Webizen Charter â€” Bound UN/values Human-Rights Instrument Corpus" ;
+    dcterms:title "Webizen Charter - Bound UN/values Human-Rights Instrument Corpus" ;
     webizen:corpusVersion "0.0.1-init" ;
+    webizen:generatedByScript "scripts/Generate-Manifest.ps1" ;
+    webizen:generationMethod "SHA-256 over each .n3 file excluding MANIFEST.n3, sorted by filename" ;
     webizen:instrumentCount 101 ;
     webizen:boundInstrument
     <https://ns.webcivics.org/values/abolition-forced-labour-convention-1957-no-105#Instrument>,

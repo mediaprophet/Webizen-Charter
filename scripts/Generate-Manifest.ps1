@@ -4,8 +4,10 @@
 $instrumentsDir = Join-Path $PSScriptRoot "..\un-instruments"
 $manifestPath = Join-Path $instrumentsDir "MANIFEST.n3"
 
-# Find all .n3 files excluding MANIFEST.n3
-$n3Files = Get-ChildItem -Path $instrumentsDir -Filter "*.n3" | Where-Object { $_.Name -ne "MANIFEST.n3" }
+# Find all .n3 files excluding MANIFEST.n3, sorted for stable output across hosts.
+$n3Files = Get-ChildItem -Path $instrumentsDir -Filter "*.n3" |
+    Where-Object { $_.Name -ne "MANIFEST.n3" } |
+    Sort-Object -Property Name
 $instrumentCount = $n3Files.Count
 
 $manifestContent = @"
@@ -15,8 +17,10 @@ $manifestContent = @"
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 webizen:CharterLegalSubstrate a webizen:InstrumentCorpus ;
-    dcterms:title "Webizen Charter — Bound UN/values Human-Rights Instrument Corpus" ;
+    dcterms:title "Webizen Charter - Bound UN/values Human-Rights Instrument Corpus" ;
     webizen:corpusVersion "0.0.1-init" ;
+    webizen:generatedByScript "scripts/Generate-Manifest.ps1" ;
+    webizen:generationMethod "SHA-256 over each .n3 file excluding MANIFEST.n3, sorted by filename" ;
     webizen:instrumentCount $instrumentCount ;
     webizen:boundInstrument
 "@
