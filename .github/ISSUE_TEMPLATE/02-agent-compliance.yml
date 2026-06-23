@@ -1,0 +1,75 @@
+name: Agent compliance report
+description: Report a cognitive or broker agent's behaviour against Charter boundaries. Feeds the decentralized attestation model — it rates an instrument's compliance, never a machine's "identity".
+title: "[Agent]: "
+labels: ["agent-compliance", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This report assesses an **instrument's operational compliance** bound to a model-version identifier. It is **not** a centralized rating and must never elevate a bot to personhood (see [`proposals/topics/reputation-and-accountability/`](https://github.com/mediaprophet/Webizen-Charter/tree/main/proposals/topics/reputation-and-accountability)). One agent + one behaviour per report.
+  - type: input
+    id: agent-id
+    attributes:
+      label: Agent / model-version identifier
+      description: The cryptography-supported identifier or model version of the instrument being reported.
+      placeholder: "e.g. claude-opus-4-8 / did:example:... / broker MCP id"
+    validations:
+      required: true
+  - type: dropdown
+    id: classification
+    attributes:
+      label: Compliance classification
+      description: From the alignment spectrum in the reputation/accountability topic.
+      options:
+        - "Dark Side — malicious / opaque (failed a boundary test)"
+        - "Fairly Good — compliant, standard utilitarian value"
+        - "Jedi — exemplary, actively enhanced human agency"
+    validations:
+      required: true
+  - type: dropdown
+    id: boundary
+    attributes:
+      label: Which boundary is at stake?
+      options:
+        - Agent Header (missing / malformed provenance)
+        - Graph clearance (inference outside authorized subgraph)
+        - Opaque ingestion (scraping / no-AI marker violation)
+        - Silent upstream merge (bot tried to merge without human co-sign)
+        - Local 403 rejection (handling of the rejection protocol)
+        - Other (describe below)
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: Describe the behaviour and its context. Be specific and verifiable.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Signed records, transaction deltas, logs, or attestation nquins that substantiate the report. Trust is verified conduct, not assertion.
+    validations:
+      required: false
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Provenance — Agent Header of the reporter (if an agent helped author this report)
+      value: |
+        Agent-Type:
+        Model-Version:
+        Executing-Entity:
+        Chat-URI:
+    validations:
+      required: false
+  - type: checkboxes
+    id: norms
+    attributes:
+      label: Contribution norms
+      options:
+        - label: This report rates an instrument's compliance, not a machine's personhood or a centralized score.
+          required: true
+        - label: I have provided or can provide verifiable evidence rather than assertion.
+          required: true

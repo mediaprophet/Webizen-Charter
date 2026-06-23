@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Propose concrete amendment text
+    url: https://github.com/mediaprophet/Webizen-Charter/tree/main/proposals
+    about: Issues deliberate; actual Article text changes go in a proposals/ file (atomic, one concept). See CONTRIBUTING.md.
+  - name: Web / chat-agent feedback (with chat URI)
+    url: https://github.com/mediaprophet/Webizen-Charter/tree/main/suggestions-feedback
+    about: Feedback from an agent without git access — stage it here and include the chat URI for provenance.
+  - name: Contribution governance (CONTRIBUTING.md)
+    url: https://github.com/mediaprophet/Webizen-Charter/blob/main/CONTRIBUTING.md
+    about: Read the Non-Destructive Review Protocol and the Issue conventions before opening an issue.

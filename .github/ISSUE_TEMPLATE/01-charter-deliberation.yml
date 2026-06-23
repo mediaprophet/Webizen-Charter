@@ -1,0 +1,79 @@
+name: Charter deliberation (flaw, gap, or clarification)
+description: Raise a logical flaw, contradiction, missing classification, ambiguity, or governance/provenance concern about a Charter article. Issues deliberate; they do not change canonical text.
+title: "[Charter]: "
+labels: ["deliberation", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for engaging the Charter rigorously.
+
+        **Issues are for deliberation, not edits.** Concrete amendment *text* belongs in a `proposals/` file (see [CONTRIBUTING.md](https://github.com/mediaprophet/Webizen-Charter/blob/main/CONTRIBUTING.md)). One concern per issue — split unrelated concerns.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of concern
+      options:
+        - Logical flaw / internal contradiction
+        - Missing classification or gap
+        - Ambiguity / clarification needed
+        - Governance or provenance concern
+    validations:
+      required: true
+  - type: dropdown
+    id: expression
+    attributes:
+      label: Which expression?
+      description: The same article number can differ between the two TOCs — say which.
+      options:
+        - General (TOC-General.md / working-draft / dev/general)
+        - Qualia (TOC-Qualia.md / dev/qualia)
+        - Both / cross-cutting
+        - Not article-specific
+    validations:
+      required: true
+  - type: input
+    id: locus
+    attributes:
+      label: Article + clause + file:line
+      description: Cite the exact locus so the concern is anchored.
+      placeholder: "e.g. Art. 23.2, working-draft/Part-IV-Operational-Provenance.md:37"
+    validations:
+      required: true
+  - type: textarea
+    id: concern
+    attributes:
+      label: The concern
+      description: State the flaw / gap / question precisely. Quote the exact text you are referring to.
+    validations:
+      required: true
+  - type: textarea
+    id: direction
+    attributes:
+      label: Suggested direction (optional)
+      description: Not amendment text — just the direction you would take. If accepted, this graduates into an atomic proposal in proposals/.
+    validations:
+      required: false
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Provenance — Agent Header (required if a cognitive agent helped author this)
+      description: If an LLM/agent helped produce this issue, fill the Agent Header. For web/chat agents, include the chat URI. Leave blank only if authored directly by a human with no agent involvement.
+      value: |
+        Agent-Type:
+        Model-Version:
+        Executing-Entity:
+        Chat-URI:
+    validations:
+      required: false
+  - type: checkboxes
+    id: norms
+    attributes:
+      label: Contribution norms
+      options:
+        - label: This issue raises a single concern (atomic).
+          required: true
+        - label: I have cited the specific Article/clause and stated which expression (General / Qualia / Both).
+          required: true
+        - label: I understand this Issue deliberates and does not itself change canonical text; changes go through an atomic proposal and a human-signed merge.
+          required: true

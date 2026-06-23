@@ -69,6 +69,7 @@ CONTRIBUTING.md        THE governance: Non-Destructive Review Protocol + Proposa
 CHANGELOG.md           Keep-a-Changelog; SemVer
 LICENSE
 CLAUDE.md              This file
+.github/ISSUE_TEMPLATE/ GitHub Issue forms (deliberation, agent-compliance) + config.yml
 TOC-General.md         The 42 articles in general engineering terms
 TOC-Qualia.md          The 42 articles in QualiaDB-specific terms (nquins, Local 403)
 SHACL-Agent-Header.md  webizen:AgentHeaderShape — the closed SHACL gate for agent transactions
@@ -140,10 +141,19 @@ the note so the provenance trail is intact. For a local CLI session with no shar
 explicitly and anchor provenance to a companion document instead (see the existing
 `suggestions-feedback/20260623_claude_opus_4.8_*.md`).
 
-### D. Conceptual disagreement / logical flaw
+### D. Conceptual disagreement / logical flaw / clarification (GitHub Issues)
 
-Open a GitHub Issue citing the specific Article and line — **do not** debate philosophy via inline
-comments or strikethroughs in the text.
+Issues are for **deliberation** — they debate, they never change canonical text. Use the issue
+forms in `.github/ISSUE_TEMPLATE/` ("Charter deliberation" or "Agent compliance report"); blank
+issues are disabled. **Do not** debate philosophy via inline comments or strikethroughs in the
+charter files. When you open or comment on an issue:
+
+- Cite the Article + clause + `file:line`, **and state which expression** (General / Qualia / Both).
+- One concern per issue (atomic, like proposals).
+- If you (a cognitive agent) authored the issue text, fill the Agent Header block in the form
+  (`Agent-Type` / `Model-Version` / `Executing-Entity`; `Chat-URI` for web agents).
+- An accepted issue **graduates into an atomic proposal** (path A) that references it (`Closes #N`);
+  the human signs the merge. See `CONTRIBUTING.md` → *Contributing via GitHub Issues*.
 
 ---
 
@@ -191,6 +201,7 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 | Action | Default |
 |--------|---------|
 | Add a file under `proposals/`, `proposals/topics/`, `suggestions-feedback/` | ✅ Yes |
+| Open a GitHub Issue to deliberate (cite article + expression + provenance) | ✅ Yes — Issues debate, they don't change text |
 | Edit `working-draft/` charter prose directly | ⚠️ Only via proposal, or on explicit architect direction |
 | Edit Articles/Preamble/TOCs/SHACL/`.n3` on `main` | ❌ No — proposal + human-signed merge |
 | Delete or overwrite any existing file | ❌ No — supersede with `[SUPERSEDED]` + pointer |
