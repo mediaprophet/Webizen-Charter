@@ -34,9 +34,15 @@ steward_default: "Timothy Charles Holborn (Charter Architect)"
 
 <!-- One human per row. Add via a human-signed disposition; never auto-add an agent here. -->
 
-| Stakeholder | Cryptographic identifier (DID / GPG / SSH) | Added (signed) |
-|-------------|--------------------------------------------|----------------|
-| Timothy Charles Holborn (Charter Architect) | _to be recorded_ | bootstrap |
+Declare each stakeholder's **capacity** (see `../CONTRIBUTING.md` → *Submission capacity & selective
+disclosure*). A `natural-person` may use selective disclosure (identifier may be pseudonymous;
+jurisdiction optional). An `entity-agent` **must** disclose the entity, its type, and its
+jurisdiction — undisclosed government/corporate influence on ratification is exactly the capture this
+roster exists to prevent.
+
+| Stakeholder | Capacity | On behalf of (entity + type + jurisdiction) | Cryptographic identifier | Added (signed) |
+|-------------|----------|---------------------------------------------|--------------------------|----------------|
+| Timothy Charles Holborn (Charter Architect) | natural-person | — (own standing) | _to be recorded_ | bootstrap |
 
 ## Advisory stakeholders (agents & unverified parties)
 

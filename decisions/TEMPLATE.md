@@ -8,6 +8,8 @@ originating_agent: "[Agent + version that DRAFTED this disposition text, or 'Hum
 originating_source: "[Chat URI / URL for the originating content, if any]"
 relaying_agent: "[Agent + version that RECORDED this into the repo. Omit if a human did it directly]"
 deciding_human: "[Human issuing the disposition — REQUIRED for any binding disposition]"
+deciding_capacity: "[natural-person | natural-person-as-fiduciary | entity-agent]"
+on_behalf_of_entity: "[Entity legal name + type + jurisdiction — REQUIRED if deciding_capacity is entity-agent]"
 signature: "[GPG/SSH/Ed25519 signature reference over this disposition — REQUIRED for any binding disposition]"
 supersedes: "[path to a prior disposition this replaces, if any]"
 ---

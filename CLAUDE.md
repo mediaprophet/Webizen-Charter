@@ -122,11 +122,13 @@ and link the file + line. Never assume a number means the same thing across both
    model_setting: "Default"
    agent_jurisdiction: "AU (operator/local edge node) · US (Anthropic inference)"
    executing_human: "<the human directing the change>"
+   submission_capacity: "natural-person"   # or natural-person-as-fiduciary | entity-agent (+ entity fields)
    target: "Part-X or Article-Y (state General or Qualia)"
    proposal_type: "addition | modification | deletion"
    ---
    ```
-   See `CONTRIBUTING.md` → *Provenance chain* for when to use `originating_agent` vs `relaying_agent`.
+   See `CONTRIBUTING.md` → *Provenance chain* (originating vs relaying agent) and *Submission capacity
+   & selective disclosure* (natural-person vs entity-agent).
 4. Body: **Rationale**, then **Proposed Text** showing current → proposed for each clause. Include a
    **SHACL Delta** when the change has an enforcement consequence (see the existing
    `proposals/20260623_120900_*Integrate-UN-Ontologies.md` for the pattern).
@@ -218,6 +220,13 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 - **Decouple authorship from execution.** You execute; the named human authors. Make that split
   visible in proposal frontmatter (`relaying_agent` vs `executing_human`) and commit headers
   (`Executing-Entity`).
+- **Declare the principal's capacity; honour selective disclosure.** Record whether the human acts as
+  a `natural-person` (own standing), `natural-person-as-fiduciary`, or `entity-agent`. A natural
+  person in their own standing **may withhold jurisdiction and identity** (selective disclosure, Art.
+  4/5) — never demand it, and never infer or fill it in. An `entity-agent` (government, corporation,
+  NGO, etc.) **must** disclose entity + jurisdiction + mandate (a legal personality owes transparency,
+  not privacy — Art. 7). "Entity" here = incorporated legal personality, *not* the charter's
+  "entity-centric" (human) data of Art. 16/17.
 - **Identify every agent in the chain.** When content was produced by one agent (e.g. a web LLM
   via an Issue or pasted URL) and you only transcribe/action it, record **both**: the upstream
   agent as `originating_agent`/`Originating-Agent` (+ source URI) and yourself as

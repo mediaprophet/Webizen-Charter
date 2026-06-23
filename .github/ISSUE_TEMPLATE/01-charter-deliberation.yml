@@ -54,6 +54,30 @@ body:
       description: Not amendment text — just the direction you would take. If accepted, this graduates into an atomic proposal in proposals/.
     validations:
       required: false
+  - type: dropdown
+    id: capacity
+    attributes:
+      label: Submission capacity
+      description: Are you acting as yourself, or for an organisation? A natural person in their own standing may use selective disclosure (jurisdiction optional). An entity-agent must disclose the entity below.
+      options:
+        - Natural person — my own standing (selective disclosure; jurisdiction optional)
+        - Natural person — as fiduciary for another natural person
+        - Agent for an incorporated entity / legal personality (must disclose entity below)
+    validations:
+      required: true
+  - type: textarea
+    id: entity
+    attributes:
+      label: Entity disclosure (REQUIRED only if submitting for an incorporated entity)
+      description: A legal personality owes transparency, not privacy (Art. 7). Natural persons in their own standing — leave blank.
+      value: |
+        On-behalf-of-entity:
+        Entity-type:          # government / educational / ngo / not-for-profit / company / corporation / …
+        Entity-jurisdiction:  # ISO 3166 code(s)
+        Representative-authority:
+        Conflict-of-interest: # paid mandate / lobbying / funding interest, or none
+    validations:
+      required: false
   - type: textarea
     id: provenance
     attributes:

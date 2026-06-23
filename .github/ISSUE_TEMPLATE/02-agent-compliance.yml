@@ -53,6 +53,17 @@ body:
       description: Signed records, transaction deltas, logs, or attestation nquins that substantiate the report. Trust is verified conduct, not assertion.
     validations:
       required: false
+  - type: dropdown
+    id: capacity
+    attributes:
+      label: Reporter capacity
+      description: Natural person in own standing may use selective disclosure. An entity-agent must disclose the entity (legal personalities owe transparency).
+      options:
+        - Natural person — my own standing (selective disclosure)
+        - Natural person — as fiduciary for another natural person
+        - Agent for an incorporated entity / legal personality (disclose in 'What happened')
+    validations:
+      required: true
   - type: textarea
     id: provenance
     attributes:

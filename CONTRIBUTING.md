@@ -61,12 +61,48 @@ originating_agent: "Agent + version that PRODUCED the content/insight (or 'Human
 originating_source: "Chat URI / URL / 'copy-paste from <where>' for the originating content. [Required when originating_agent is a remote/web agent]"
 relaying_agent: "Agent + version that TRANSCRIBED and/or ACTIONED this into the repo (e.g. 'Claude Opus 4.8 (Claude Code), claude-opus-4-8'). [Omit if a human did it directly]"
 model_setting: "Settings or context applied (e.g., High, Temperature 0.7) [Optional]"
-agent_jurisdiction: "Jurisdiction(s) of the executing/relaying node (e.g., AU edge · US inference, EU, Unknown)"
-executing_human: "Human's Cryptographic Identifier or Name (the sole rights-bearer)"
+agent_jurisdiction: "Jurisdiction(s) of the executing/relaying COMPUTE NODE (e.g., AU edge · US inference) — distinct from the principal's jurisdiction below"
+executing_human: "The natural human executing the submission (always a natural person — Art. 6)"
+submission_capacity: "natural-person | natural-person-as-fiduciary | entity-agent"
+on_behalf_of_entity: "Legal name of the incorporated entity/legal personality. [REQUIRED for entity-agent; OMIT for natural-person]"
+entity_type: "government | government-department | intergovernmental-organisation | public-body | educational-institution | research-institution | ngo | civil-society | not-for-profit | charity | company | corporation | cooperative | trust | religious-organisation | political-party | trade-union | other [entity-agent only]"
+entity_jurisdiction: "ISO 3166 code(s) of the entity. [REQUIRED for entity-agent; for natural-person this is OPTIONAL — may be 'declined' under selective disclosure]"
+representative_authority: "The human's mandate to represent the entity (role/instrument). [entity-agent only]"
+conflict_of_interest: "Paid mandate / lobbying / funding interest, or 'none'. [disclose for entity-agent]"
 target: "Part-X or Article-Y (state General or Qualia)"
 proposal_type: "addition | modification | deletion"
 ---
 ```
+
+#### Submission capacity & selective disclosure
+
+A submission's **principal** — the party whose authority and accountability stand behind it — is not
+always the natural person typing it. Declare the capacity (Art. 5, 7; extends the Art. 6
+authorship/execution split to the human layer):
+
+- **`natural-person`** — a natural legal person acting in **their own standing**. They are the
+  rights-bearing Webizen (Art. 7). **Selective disclosure applies:** `entity_jurisdiction` and
+  further identifying detail are **optional** and may be `declined` (Art. 4 data inviolability, Art. 5
+  cryptographic self-determination, Art. 18 ephemeral credentials). The only hard requirement is a
+  stable cryptographic identifier binding authorship — which may be **pseudonymous**, optionally a
+  verifiable credential proving natural-personhood *without* revealing jurisdiction or identity.
+- **`natural-person-as-fiduciary`** — a natural person acting **for another natural person**
+  (guardian, delegate, power of attorney). Declare the fiduciary relationship; the represented person
+  retains selective disclosure.
+- **`entity-agent`** — a natural person acting as agent for an **incorporated entity / legal
+  personality** (government or department, IGO, educational/research body, NGO, NFP/charity,
+  company/corporation, cooperative, trust, etc.). A legal personality is **not** a rights-bearing
+  Webizen (Art. 7); it owes transparency, not privacy. Therefore **full disclosure is required**:
+  `on_behalf_of_entity`, `entity_type`, `entity_jurisdiction`, `representative_authority`, and any
+  `conflict_of_interest`. The natural human is still named in `executing_human` (Art. 6), but the
+  entity is the accountable principal.
+
+> **The asymmetry is deliberate.** Rights-bearing natural persons get data-minimization and may
+> withhold jurisdiction; incorporated legal personalities (especially governments and corporations)
+> must disclose entity + jurisdiction + mandate so that influence on the charter is never hidden —
+> this is the charter's anti-capture posture (Preamble; Art. 28) made procedural. "Entity" here means
+> an *incorporated legal personality* — distinct from the charter's "**entity-centric** datasets"
+> (Art. 16/17), which mean data tied to a *human*.
 
 #### Provenance chain — originating vs. relaying agent
 
